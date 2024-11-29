@@ -48,15 +48,9 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}  # Use tags extracted earlier
           labels: ${{ steps.meta.outputs.labels }}
 
-      # Step to run Docker container with port mapping
-      - name: Deploy Docker container
-        run: |
-          # Stop and remove the existing container (if any)
-          docker stop mycontainer || true
-          docker rm mycontainer || true
+     - name: Deploy Docker container
+  run: |
+    docker stop mycontainer || true
+    docker rm mycontainer || true
+    docker run -d --name mycontainer -p 8010:80 sachin816/myimage1:latest
 
-          # Pull the latest image from Docker Hub to ensure we have the latest one
-          docker pull sachin816/myimage1
-
-          # Run the Docker container with port mapping
-          docker run -d --name node_app -p 8010:80 sachin816/myimage1
