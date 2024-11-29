@@ -1,0 +1,29 @@
+name: project-frontend
+
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'  # Specify the Node.js version you're using
+
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Create build
+      run: npm run build 
+    
+    # - name: sourcemovement
+    #   run: sudo cp -r /home/administrator/Live-Project/Live_Front/studio/_work/photo_gallery_site/photo_gallery_site/dist/ * /var/www/html/studio
+       
+    # - name: nginxrestart
+    #   run: sudo service nginx restart
