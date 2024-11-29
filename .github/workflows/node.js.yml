@@ -1,4 +1,4 @@
-name: Project1
+name: Project
 
 on:
   push:
@@ -37,7 +37,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: sachin816/myimage1  # Specify your image name
+          images: sachin816/myimage1  
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
@@ -51,8 +51,8 @@ jobs:
       - name: Deploy Docker container
         run: |
           # Stop and remove the existing container (if any)
-          docker stop node_app || true
-          docker rm node_app || true
+          # docker stop node_app || true
+          # docker rm node_app || true
 
           # Pull the latest image (ensure it's the image you just pushed)
           docker pull sachin816/myimage1
