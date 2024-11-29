@@ -38,7 +38,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: sachin816/myimage1  
+          images: sachin816/dockerimage  
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
@@ -52,7 +52,7 @@ jobs:
       - name: Pull and run Docker container
         run: |
           # Pull the correct image with the proper tag
-          docker pull sachin816/myimage1:v1.0  # Replace with the actual tag
+          docker pull sachin816/dockerimage  
 
           # Run the Docker container with port mapping
-          docker run -d --name mycontainer -p 8010:80 sachin816/myimage1:v1.0  # Replace with the actual tag
+          docker run -d --name mycontainer -p 8010:80 sachin816/dockerimage
