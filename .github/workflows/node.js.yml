@@ -3,11 +3,11 @@ name: Project1
 on:
   push:
     branches:
-      - develop
+      - develop  
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: self-hosted  
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -15,33 +15,47 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Specify the Node.js version you're using
+          node-version: '20'  
 
       - name: Install dependencies
         run: npm install
 
       - name: Create build
-        run: npm run build
+        run: npm run build  
 
+      # Set up Docker Buildx (required for building multi-platform images if needed)
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2  # Set up Buildx
+        uses: docker/setup-buildx-action@v2
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v2  # Use the latest stable version tag
+        uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@v4  # Use the latest stable version tag
+        uses: docker/metadata-action@v4
         with:
-          images: sachin816/myimage1
+          images: sachin816/myimage1  # Specify your image name
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v4  # Use the latest stable version tag
+        uses: docker/build-push-action@v4
         with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          context: .  # Build Docker image from the current directory
+          push: true  # Push the image to Docker Hub
+          tags: ${{ steps.meta.outputs.tags }}  # Tag the image
           labels: ${{ steps.meta.outputs.labels }}
+
+      # Step: Run Docker container with port mapping 8010:80
+      - name: Deploy Docker container
+        run: |
+          # Stop and remove the existing container (if any)
+          docker stop node_app || true
+          docker rm node_app || true
+
+          # Pull the latest image (ensure it's the image you just pushed)
+          docker pull sachin816/myimage1
+
+          # Run the container with port mapping 8010:80
+          docker run -d --name node_app -p 8010:80 sachin816/myimage1
