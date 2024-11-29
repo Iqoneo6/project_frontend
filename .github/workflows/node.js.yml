@@ -1,4 +1,4 @@
-name: Project1
+name: Project
 
 on:
   push:
@@ -48,9 +48,8 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}  # Use tags extracted earlier
           labels: ${{ steps.meta.outputs.labels }}
 
-     - name: Deploy Docker container
-  run: |
-    docker stop mycontainer || true
-    docker rm mycontainer || true
-    docker run -d --name mycontainer -p 8010:80 sachin816/myimage1:latest
-
+      - name: Deploy Docker container  # Fixed indentation here
+        run: |
+          docker stop mycontainer || true
+          docker rm mycontainer || true
+          docker run -d --name mycontainer -p 8010:80 sachin816/myimage1:latest
