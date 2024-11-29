@@ -48,11 +48,11 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}  # Use tags extracted earlier
           labels: ${{ steps.meta.outputs.labels }}
 
-      # Pull and run Docker container (corrected indentation)
-      - name: Pull and run Docker container
-        run: |
-          # Pull the correct image with the proper tag
-          docker pull sachin816/dockerimage  
+      # # Pull and run Docker container (corrected indentation)
+      # - name: Pull and run Docker container
+      #   run: |
+      #     # Pull the correct image with the proper tag
+      #     docker pull sachin816/dockerimage  
 
-          # Run the Docker container with port mapping
-          docker run -d --name mycontainer -p 8010:80 sachin816/dockerimage
+      #     # Run the Docker container with port mapping
+      #     docker run -d --name mycontainer -p 8010:80 sachin816/dockerimage
