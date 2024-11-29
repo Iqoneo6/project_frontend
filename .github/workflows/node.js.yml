@@ -38,7 +38,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: sachin816/dockerimage  
+          images: sachin816/buildx-stable-1   
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
