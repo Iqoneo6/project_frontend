@@ -36,7 +36,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4  # Use the latest stable version tag
         with:
-          images: sachinvel59/testjodejsapp
+          images: sachin816/testjodejsapp
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4  # Use the latest stable version tag
