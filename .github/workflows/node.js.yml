@@ -1,4 +1,4 @@
-name: Project
+name: Project!
 
 on:
   push:
