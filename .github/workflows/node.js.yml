@@ -48,4 +48,4 @@ jobs:
       - name: Delete Old Container
         run: docker rm -f reactContainer || true
       - name: Run Docker Container
-        run: docker run -itd --name cont1 -p "8010:5000" sachin816/myimage
+        run: docker run -itd --name con1 -p "8020:5000" sachin816/myimage
