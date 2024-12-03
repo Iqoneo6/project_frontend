@@ -26,9 +26,9 @@ jobs:
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Docker image remove 
+      - name: Docker image prune
         run: docker image prune -f
-        
+
       - name: Build Docker Image
         run: docker build -t sachin816/myimage:${{ github.sha }} .
 
@@ -57,23 +57,6 @@ jobs:
           EC2_USER: ubuntu  
           EC2_HOST: 15.206.28.14
         run: |
-          # Install SSH client and Docker
-          sudo apt-get update
-          sudo apt-get install -y openssh-client
-
-          # Fix any broken packages and clean cache
-          sudo apt-get install -f
-          sudo apt-get clean
-          sudo apt-get update
-
-          # Install Docker from official Docker repository
-          sudo apt-get remove docker docker-engine docker.io containerd runc || true
-          sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
-          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-          sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-          sudo apt-get update
-          sudo apt-get install -y docker-ce
-
           # Create the SSH private key file
           echo "$PRIVATE_KEY" > MonitorTool.pem
           chmod 600 MonitorTool.pem
@@ -85,7 +68,7 @@ jobs:
           # SSH into EC2 and deploy Docker container
           ssh -v -o StrictHostKeyChecking=no -i MonitorTool.pem $EC2_USER@$EC2_HOST <<EOF
             # Ensure Docker is running
-            sudo systemctl start docker
+            sudo systemctl start docker || true
             sudo systemctl enable docker
 
             # Pull the Docker image from Docker Hub on the EC2 instance
