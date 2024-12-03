@@ -30,7 +30,7 @@ jobs:
         run: docker build -t image1 .
 
       - name: Publish image to Docker Hub
-        run: docker push sachin816/image1
+        run: docker push sachin816/myimage
 
   # deploy: 
   #   needs: build
