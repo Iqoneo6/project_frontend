@@ -41,7 +41,7 @@ jobs:
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Pull image from Docker Hub
-        run: docker pull sachin816/image1  
+        run: docker pull sachin816/myimage:latest
       - name: Delete Old Container
         run: docker rm -f reactContainer || true
       - name: Run Docker Container
