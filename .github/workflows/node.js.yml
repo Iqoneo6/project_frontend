@@ -27,7 +27,7 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         
       - name: Build Docker Image
-        run: docker build -t image1 .
+        run: docker build -t sachin816/myimage .
 
       - name: Publish image to Docker Hub
         run: docker push sachin816/myimage
