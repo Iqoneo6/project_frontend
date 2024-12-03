@@ -51,5 +51,27 @@ jobs:
       - name: Delete Old Container
         run: docker rm -f reactContainer || true
 
-      - name: Run Docker Container
-        run: docker run -itd --name reactContainer -p "8030:5000" sachin816/myimage:${{ github.sha }}
+      - name: Deploy to EC2
+        env:
+          PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          EC2_USER: ec2-user  # Change if you're using a different OS on EC2 (e.g., ubuntu)
+          EC2_HOST: ${{ secrets.EC2_PUBLIC_IP }}  # EC2 Public IP Address
+        run: |
+          # Install SSH client
+          sudo apt-get install -y openssh-client
+
+          # Create the SSH private key file
+          echo "$PRIVATE_KEY" > ec2-key.pem
+          chmod 600 ec2-key.pem
+
+          # SSH into EC2 and deploy Docker container
+          ssh -o StrictHostKeyChecking=no -i ec2-key.pem $EC2_USER@$EC2_HOST <<EOF
+            # Pull the Docker image from Docker Hub on the EC2 instance
+            docker pull sachin816/myimage:${{ github.sha }}
+
+            # Remove any existing container (if running)
+            docker rm -f reactContainer || true
+
+            # Run the Docker container with port mapping
+            docker run -itd --name reactContainer -p "8030:5000" sachin816/myimage:${{ github.sha }}
+          EOF
