@@ -57,19 +57,26 @@ jobs:
           EC2_USER: ubuntu  
           EC2_HOST: 15.206.28.14
         run: |
-          # Install SSH client
+          # Install SSH client and Docker
           sudo apt-get install -y openssh-client
-
+          sudo apt-get install -y docker.io
+          
           # Create the SSH private key file
           echo "$PRIVATE_KEY" > MonitorTool.pem
           chmod 600 MonitorTool.pem
 
-          # Debugging: Check that the private key file is created and accessible
+          # Debugging: Check private key file and permissions
           cat MonitorTool.pem
           ls -l MonitorTool.pem
 
           # SSH into EC2 and deploy Docker container
           ssh -v -o StrictHostKeyChecking=no -i MonitorTool.pem $EC2_USER@$EC2_HOST <<EOF
+            # Install Docker on EC2
+            sudo apt-get update
+            sudo apt-get install -y docker.io
+            sudo systemctl start docker
+            sudo systemctl enable docker
+
             # Pull the Docker image from Docker Hub on the EC2 instance
             docker pull sachin816/myimage:${{ github.sha }}
 
