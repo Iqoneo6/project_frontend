@@ -51,7 +51,7 @@ jobs:
         run: sudo docker pull sachin816/image:latest
 
       - name: Delete old Docker container
-        run: sudo docker rm -f containeru || true  
+        run: sudo docker rm -f application || true  
 
       - name: Run Docker container
-        run: sudo docker run -d -p 8010:8010 --name conta sachin816/image
+        run: sudo docker run -d -p 8000:8000 --name application sachin816/image
