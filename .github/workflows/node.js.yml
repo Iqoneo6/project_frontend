@@ -1,5 +1,4 @@
-
-name: project_Frontend
+name: project_Frontend_1
 
 on:
   push:
@@ -39,17 +38,17 @@ jobs:
         run: docker build -t sachin816/front .
 
       - name: Push to Dockerhub
-        run: docker push sachin816/front:latest
+        run: docker push sachin816/front
 
-  deploy-docker:
-    runs-on: self-hosted  
+  # deploy-docker:
+  #   runs-on: self-hosted  
 
-    steps:
-      - name: Pull Docker image
-        run: sudo docker pull sachin816/front:latest
+  #   steps:
+  #     - name: Pull Docker image
+  #       run: sudo docker pull sachin816/front:${{ github.sha }}
 
-      - name: Delete Old Docker container
-        run: sudo docker rm -f container || true
+  #     - name: Delete Old Docker container
+  #       run: sudo docker rm -f container || true
 
-      - name: Run Docker Container
-        run: sudo docker run -d -p 8010:80 --name container sachin816/front
+  #     - name: Run Docker Container
+  #       run: sudo docker run -d -p 8010:80 --name container sachin816/front:${{ github.sha }}
