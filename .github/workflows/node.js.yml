@@ -54,4 +54,4 @@ jobs:
         run: sudo docker rm -f container || true  
 
       - name: Run Docker container
-        run: sudo docker run -d -p 8010:8010 --name container sachin816/front
+        run: sudo docker run -d -p 8030:8030 --name container sachin816/front
