@@ -29,16 +29,16 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v4  # Updated version of docker/metadata-action
-        with:
-          images: sachin816/testimage
+      # - name: Extract metadata (tags, labels) for Docker
+      #   id: meta
+      #   uses: docker/metadata-action@v4  # Updated version of docker/metadata-action
+      #   with:
+      #     images: sachin816/testimage
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v3  # Use latest stable version (v3 as of now)
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+      # - name: Build and push Docker image
+      #   uses: docker/build-push-action@v3  # Use latest stable version (v3 as of now)
+      #   with:
+      #     context: .
+      #     push: true
+      #     tags: ${{ steps.meta.outputs.tags }}
+      #     labels: ${{ steps.meta.outputs.labels }}
