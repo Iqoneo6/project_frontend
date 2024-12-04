@@ -48,7 +48,7 @@ jobs:
 
     steps:
       - name: Pull Docker image
-        run: sudo docker pull sachin816/front:${{ github.sha }}  
+        run: sudo docker pull sachin816/front
 
       - name: Delete old Docker container
         run: sudo docker rm -f container || true  
