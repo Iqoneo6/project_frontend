@@ -38,20 +38,20 @@ jobs:
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
       - name: Build Docker image
-        run: docker build -t sachin816/front .
+        run: docker build -t sachin816/image .
 
       - name: Push Docker image to Docker Hub
-        run: docker push sachin816/front  # Push the built image to Docker Hub
+        run: docker push sachin816/image
 
   deploy-docker:
     runs-on: self-hosted  
 
     steps:
       - name: Pull Docker image
-        run: sudo docker pull sachin816/front
+        run: sudo docker pull sachin816/image
 
       - name: Delete old Docker container
-        run: sudo docker rm -f container || true  
+        run: sudo docker rm -f containeru || true  
 
       - name: Run Docker container
-        run: sudo docker run -d -p 8030:8030 --name container sachin816/front
+        run: sudo docker run -d -p 8070:8070 --name containeru sachin816/image
