@@ -1,4 +1,4 @@
-name: GithubAction-CI-and-CD
+name: GithubAction
 
 on:
   push:
