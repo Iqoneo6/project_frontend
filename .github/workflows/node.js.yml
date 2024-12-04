@@ -54,4 +54,4 @@ jobs:
         run: sudo docker rm -f containeru || true  
 
       - name: Run Docker container
-        run: sudo docker run -d -p 8070:8070 --name containeru sachin816/image
+        run: sudo docker run -d -p 8010:8010 --name conta sachin816/image
