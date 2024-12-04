@@ -25,7 +25,7 @@ jobs:
         run: npm run build  
 
   build-docker:
-    runs-on: ubuntu-latest  # Use GitHub-hosted runner for the second job
+    runs-on: ubuntu-latest  
 
     steps:
       - name: Checkout code
@@ -37,25 +37,21 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
-      - name: Pull the latest Docker image
-        run: docker pull sachin816/front:latest 
-
       - name: Build Docker image
         run: docker build -t sachin816/front .
 
-      # Uncomment the following step if you want to push the image to Docker Hub after building it
-      # - name: Push Docker image to Docker Hub
-      #   run: docker push sachin816/front  # Push the built image to Docker Hub
+      - name: Push Docker image to Docker Hub
+        run: docker push sachin816/front  # Push the built image to Docker Hub
 
-  # deploy-docker:
-  #   runs-on: self-hosted  # Uncomment and modify this section if you want to deploy the Docker container after building
+  deploy-docker:
+    runs-on: self-hosted  
 
-  #   steps:
-  #     - name: Pull Docker image
-  #       run: sudo docker pull sachin816/front:${{ github.sha }}  # Pull the image tagged with the GitHub SHA
+    steps:
+      - name: Pull Docker image
+        run: sudo docker pull sachin816/front:${{ github.sha }}  
 
-  #     - name: Delete old Docker container
-  #       run: sudo docker rm -f container || true  # Remove old container if exists
+      - name: Delete old Docker container
+        run: sudo docker rm -f container || true  
 
-  #     - name: Run Docker container
-  #       run: sudo docker run -d -p 8010:80 --name container sachin816/front:${{ github.sha }}  # Run the container on port 8010
+      - name: Run Docker container
+        run: sudo docker run -d -p 8010:80 --name container sachin816/front
