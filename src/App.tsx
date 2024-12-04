@@ -26,7 +26,7 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + Sachin</h1>
+      <h1>Vite + Developer</h1>
       <div className="card">
         <button onClick={handleCallApiTest}>Hit me to call API</button>
         <p>
