@@ -1,4 +1,4 @@
-name: Push the image 
+name: Ci and Cd 
 
 on:
   push:
