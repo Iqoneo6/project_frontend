@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react-swc'
 export default defineConfig({
   plugins: [react()],
   server: {
+    port: 8010,  // Set Vite to run on port 8010
     proxy: {
       // When the request starts with /api, it will be proxied to the target server
       '/api': {
@@ -17,7 +18,7 @@ export default defineConfig({
       //   target: 'http://another-server.com',
       //   changeOrigin: true,
       //   rewrite: (path) => path.replace(/^\/another-path/, ''),
-      // },
+      // },
     },
-  }
+  },
 })
