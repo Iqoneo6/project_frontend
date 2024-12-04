@@ -41,14 +41,14 @@ jobs:
         run: docker build -t sachin816/image .
 
       - name: Push Docker image to Docker Hub
-        run: docker push sachin816/image
+        run: docker push sachin816/image:latest
 
   deploy-docker:
     runs-on: self-hosted  
 
     steps:
       - name: Pull Docker image
-        run: sudo docker pull sachin816/image
+        run: sudo docker pull sachin816/image:latest
 
       - name: Delete old Docker container
         run: sudo docker rm -f containeru || true  
