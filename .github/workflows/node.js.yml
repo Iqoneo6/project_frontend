@@ -37,8 +37,8 @@ jobs:
       - name: Build the Docker image
         run: docker build -t sachin816/front .
 
-      - name: Push to Dockerhub
-        run: docker push sachin816/front
+      # - name: Push to Dockerhub
+      #   run: docker push sachin816/front
 
   # deploy-docker:
   #   runs-on: self-hosted  
