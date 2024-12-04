@@ -1,4 +1,4 @@
-name: Ci and Cd 
+name: Ci and Cd
 
 on:
   push:
@@ -15,28 +15,28 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install
-      
+
       - name: Create build
         run: npm run build
-      
+
       - name: Log in to Docker Hub
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      
+
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: sachin816/testimage
-          
-       - name: Build Docker Image
-         
-        run: docker build -t sachin816/myimage .
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Build Docker Image
+        run: |
+          docker build -t sachin816/myimage .
+          docker tag sachin816/myimage ${{ steps.meta.outputs.tags }}
+          docker build --label ${{ steps.meta.outputs.labels }}
