@@ -3,7 +3,7 @@ name: project_Frontend_1
 on:
   push:
     branches:
-      - develop
+      - develop  
 
 jobs:
   build-node:
@@ -16,39 +16,42 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Specify the Node.js version you're using
+          node-version: '20'  
 
       - name: Install dependencies
-        run: npm install
+        run: npm install  
+
+      - name: Build the project
+        run: npm run build  
 
   build-docker:
-    runs-on: ubuntu-latest  # GitHub-hosted runner for the second job
+    runs-on: ubuntu-latest  
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Login Dockerhub
+      - name: Login to Docker Hub
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
-      - name: Build the Docker image
+      - name: Build Docker image
         run: docker build -t sachin816/front .
 
-      - name: Push to Dockerhub
-        run: docker push sachin816/front
+      - name: Push Docker image to Docker Hub
+        run: docker push sachin816/front  # Push the built image to Docker Hub
 
-  # deploy-docker:
-  #   runs-on: self-hosted  
+  deploy-docker:
+    runs-on: self-hosted  
 
-  #   steps:
-  #     - name: Pull Docker image
-  #       run: sudo docker pull sachin816/front:${{ github.sha }}
+    steps:
+      - name: Pull Docker image
+        run: sudo docker pull sachin816/front
 
-  #     - name: Delete Old Docker container
-  #       run: sudo docker rm -f container || true
+      - name: Delete old Docker container
+        run: sudo docker rm -f container || true  
 
-  #     - name: Run Docker Container
-  #       run: sudo docker run -d -p 8010:80 --name container sachin816/front:${{ github.sha }}
+      - name: Run Docker container
+        run: sudo docker run -d -p 8010:80 --name container sachin816/front
