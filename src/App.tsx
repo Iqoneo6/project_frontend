@@ -7,7 +7,7 @@ import axios from "axios";
 function App() {
   const handleCallApiTest = async () => {
     await axios
-      .get("https://3.109.213.225:7000/")
+      .get("https://demoback.bremmo.in/")
       .then((res) => {
         const response = res.data.message
         toast.success(response)
