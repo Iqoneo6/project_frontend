@@ -41,8 +41,8 @@ jobs:
         run: docker build -t sachin816/wizinoa .
 
 
-  #     - name: Push Docker image to Docker Hub
-  #       run: docker push sachin816/image:latest
+      - name: Push Docker image to Docker Hub
+        run: docker push sachin816/wizinoa:latest
 
   # deploy-docker:
   #   runs-on: self-hosted  
