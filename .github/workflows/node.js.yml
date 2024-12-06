@@ -38,20 +38,21 @@ jobs:
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
       - name: Build Docker image
-        run: docker build -t sachin816/image .
+        run: docker build -t react-app -f frontend/Dockerfile .
 
-      - name: Push Docker image to Docker Hub
-        run: docker push sachin816/image:latest
 
-  deploy-docker:
-    runs-on: self-hosted  
+  #     - name: Push Docker image to Docker Hub
+  #       run: docker push sachin816/image:latest
 
-    steps:
-      - name: Pull Docker image
-        run: sudo docker pull sachin816/image:latest
+  # deploy-docker:
+  #   runs-on: self-hosted  
 
-      - name: Delete old Docker container
-        run: sudo docker rm -f application || true  
+  #   steps:
+  #     - name: Pull Docker image
+  #       run: sudo docker pull sachin816/image:latest
 
-      - name: Run Docker container
-        run: sudo docker run -d -p 8010:8010 --name appl sachin816/image
+  #     - name: Delete old Docker container
+  #       run: sudo docker rm -f application || true  
+
+  #     - name: Run Docker container
+  #       run: sudo docker run -d -p 8010:8010 --name appl sachin816/image
