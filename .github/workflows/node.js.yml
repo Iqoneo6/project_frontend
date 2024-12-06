@@ -44,12 +44,12 @@ jobs:
       - name: Push Docker image to Docker Hub
         run: docker push sachin816/wizinoa:latest
 
-  # deploy-docker:
-  #   runs-on: self-hosted  
+  deploy-docker:
+    runs-on: self-hosted  
 
-  #   steps:
-  #     - name: Pull Docker image
-  #       run: sudo docker pull sachin816/image:latest
+    steps:
+      - name: Pull Docker image
+        run: sudo docker pull sachin816/wizinoa:latest
 
       # - name: Delete old Docker container
       #   run: sudo docker rm -f app25 || true  
