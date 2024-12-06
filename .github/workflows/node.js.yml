@@ -38,7 +38,7 @@ jobs:
         run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
       - name: Build Docker image
-        run: docker build -t sachin816/Dockerfile .
+        run: docker build -t sachin816/image .
 
 
   #     - name: Push Docker image to Docker Hub
