@@ -51,8 +51,8 @@ jobs:
       - name: Pull Docker image
         run: sudo docker pull sachin816/wizinoa:latest
 
-      # - name: Delete old Docker container
-      #   run: sudo docker rm -f app25 || true  
+      - name: Delete old Docker container
+        run: sudo docker rm -f react || true  
 
       # - name: Run Docker container
       #   run: sudo docker run -d -p 4000:4000 --name app25 sachin816/image
