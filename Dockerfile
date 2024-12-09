@@ -13,11 +13,8 @@ RUN npm install
 # Step 5: Copy the rest of the application code (including vite.config.ts)
 COPY . .
 
-# Step 6: Build the Vite project (if you want to build it before serving)
-RUN npm run build
+# Step 6: Expose the Vite dev server port (default: 5173)
+EXPOSE 5173
 
-# Step 7: Expose the port that the Vite development server or production server will run on
-EXPOSE 4000
-
-# Step 8: Start the application (either for development or production)
+# Step 7: Start the Vite development server
 CMD ["npm", "run", "dev"]
