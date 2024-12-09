@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # Step 7: Expose the port that the Vite development server or production server will run on
-EXPOSE 3000
+EXPOSE 4000
 
 # Step 8: Start the application (either for development or production)
 CMD ["npm", "run", "dev"]
