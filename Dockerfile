@@ -11,7 +11,7 @@ RUN npm install
 # Step 4: Copy the rest of the application files
 COPY . .
 
-# Step 5: Expose the port for development
+# Step 5: Expose the port for development (port 4000 as per your vite.config.ts)
 EXPOSE 4000
 
 # Step 6: Run the Vite development server
