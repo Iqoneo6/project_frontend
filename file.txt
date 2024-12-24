@@ -2,3 +2,5 @@ Hi i am sachin S.R i am from theni i have overall of 2 + years of experience in 
 s3 Iam vpc route53 load balancer Eks ecs sns sqs cloud front cloud formation code depoly code pipeline code build
 I am also experience in devops Tool like git git for version control jenkins for intergration Docker for containerzation 
 terraform for cloud infrastrture 
+
+we are using the jira for build and issue tracking dashboard 
