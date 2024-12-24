@@ -1,2 +1,2 @@
 Hi i am sachin S.R i am from theni i have overall of 2 + years of experience in aws and DevOps I aws i have word with service like ec2 
-s3 Iam vpc rooute 53 load balancer 
+s3 Iam vpc route53 load balancer Eks ecs sns sqs cloud front cloud formation code depoly code pipeline code build
