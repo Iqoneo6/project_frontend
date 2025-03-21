@@ -27,5 +27,5 @@ jobs:
     - name: Source movement
       run: sudo cp -r /home/ubuntu/actions-runner/_work/project_frontend/project_frontend/dist/ * /var/www/html/project
 
-    # - name: Nginx restart
-    #   run: sudo service nginx restart
+    - name: Nginx restart
+      run: sudo service nginx restart
