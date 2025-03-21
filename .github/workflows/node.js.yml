@@ -24,8 +24,8 @@ jobs:
     - name: Build project
       run: npm run build
 
-    # - name: Source movement
-    #   run: sudo cp -r /home/administrator/Live-Project/Live_Front/investment/_work/winwininvestment/winwininvestment/dist/ * /var/www/html/project
+    - name: Source movement
+      run: sudo cp -r /home/ubuntu/actions-runner/_work/project_frontend/project_frontend/dist/ * /var/www/html/project
 
     # - name: Nginx restart
     #   run: sudo service nginx restart
