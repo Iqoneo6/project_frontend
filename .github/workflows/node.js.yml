@@ -24,8 +24,8 @@ jobs:
     - name: Build project
       run: npm run build
 
-    # - name: Source movement
-    #   run: sudo cp -r /home/administrator/Live-Project/Live_Front/rehana/_work/Rehana__Live/Rehana__Live/dist/ * /var/www/html/rehana
+    - name: Source movement
+      run: sudo cp -r /home/ubuntu/project/_work/project_frontend/project_frontend/dist/ * /var/www/html/dev
 
     # - name: Nginx restart
     #   run: sudo service nginx restart
