@@ -1,4 +1,4 @@
-name: project
+name:my project
 
 on:
   push:
