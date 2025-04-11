@@ -24,8 +24,8 @@ jobs:
     - name: Build project
       run: npm run build
 
-    # - name: Source movement
-    #   run: sudo cp -r /home/ubuntu/actions-runner/_work/project_frontend/project_frontend/dist/ * /var/www/html/opt
+    - name: Source movement
+      run: sudo cp -r /home/ubuntu/actions-runner/_work/project_frontend/project_frontend/dist/ * /var/www/html/opt
 
-    # - name: Nginx restart
-    #   run: sudo service nginx restart
+    - name: Nginx restart
+      run: sudo service nginx restart
