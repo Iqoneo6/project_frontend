@@ -1,4 +1,4 @@
-name:Project_Github_action
+name: Project_Github_action
 
 on:
   push:
