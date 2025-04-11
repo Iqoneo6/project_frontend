@@ -1,31 +1,38 @@
-name: Project
+name: Push-to-EC2
 
+# Trigger deployment only on push to main branch
 on:
   push:
     branches:
-      - develop
+      - main
 
 jobs:
-  build:
-    runs-on: self-hosted
+  deploy:
+    name: Deploy to EC2 on master branch push
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout the files
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'  
+      - name: Deploy to Server 1
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.HOST_DNS }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          TARGET: ${{ secrets.TARGET_DIR }}
 
-    - name: Install dependencies
-      run: npm install 
-    
-    - name: Build project
-      run: npm run build
-      
-    # - name: sourcemovement
-    #   run: sudo cp -r /home/administrator/Live-Project/Live_Front/lokalnav/_work/Lokal_Frontend/Lokal_Frontend/dist/ * /var/www/html/lokalnav
-  
-    # - name: Nginxrestart
-    #   run: sudo service nginx restart
+      - name: Executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            sudo apt-get -y update
+            sudo apt-get install -y apache2
+            sudo systemctl start apache2
+            sudo systemctl enable apache2
+            cd home
+            sudo mv * /var/www/html
