@@ -1,4 +1,4 @@
-name:mainproject
+name: mainproject
 
 on:
   push:
@@ -16,16 +16,18 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '20'  
+        node-version: '20'
 
     - name: Install dependencies
-      run: npm install 
+      run: npm install
 
     - name: Build project
       run: npm run build
 
-    - name: Source movement
-      run: sudo cp -r /home/ubuntu/actions-runner/_work/project_frontend/project_frontend/dist/ * /var/www/html/opt
+    - name: Copy built files to Nginx directory
+      run: |
+        sudo rm -rf /var/www/html/opt/*
+        sudo cp -r dist/* /var/www/html/opt/
 
-    - name: Nginx restart
+    - name: Restart Nginx
       run: sudo service nginx restart
