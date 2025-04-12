@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: self-ubuntu
+    runs-on: self-hosted
 
     steps:
     - name: Checkout code
