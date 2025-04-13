@@ -1,4 +1,4 @@
-# Trigger deployment only on push to main branch
+ # Trigger deployment only on push to main branch
 on:
   push:
     branches:
