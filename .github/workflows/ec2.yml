@@ -1,38 +1,31 @@
-name: Push-to-EC2
+name: Github_Action
 
-# Trigger deployment only on push to main branch
 on:
   push:
     branches:
       - develop
 
 jobs:
-  deploy:
-    name: Deploy to EC2 on develop branch push
-    runs-on: ubuntu-latest
+  build:
+    runs-on: self-hosted
 
     steps:
-      - name: Checkout the files
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Deploy to Server 1
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          REMOTE_HOST: ${{ secrets.HOST_DNS }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: ${{ secrets.TARGET_DIR }}
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'  
 
-      - name: Executing remote ssh commands using ssh key
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST_DNS }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            sudo apt-get -y update
-            sudo apt-get install -y apache2
-            sudo systemctl start apache2
-            sudo systemctl enable apache2
-            cd home
-            sudo mv * /var/www/html
+    - name: Install dependencies
+      run: npm install 
+    
+    - name: Build project
+      run: npm run build
+      
+    # - name: sourcemovement
+    #   run: sudo cp -r /home/administrator/Live-Project/Live_Front/actionslokal/_work/Frontend_lokal/Frontend_lokal/dist/ * /var/www/html/lokalnav
+  
+    # - name: Nginxrestart
+    #   run: sudo service nginx restart
