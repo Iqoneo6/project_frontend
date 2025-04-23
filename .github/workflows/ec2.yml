@@ -24,8 +24,8 @@ jobs:
     - name: Build project
       run: npm run build
       
-    # - name: sourcemovement
-    #   run: sudo cp -r /home/administrator/Live-Project/Live_Front/actionslokal/_work/Frontend_lokal/Frontend_lokal/dist/ * /var/www/html/lokalnav
+    - name: sourcemovement
+      run: sudo cp -r /home/ubuntu/actions-runner/_work/project_frontend/project_frontend/dist/ * /var/www/html/opt
   
     # - name: Nginxrestart
     #   run: sudo service nginx restart
