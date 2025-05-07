@@ -1,31 +1,27 @@
-name: project_Frontend
+name: Project_Frontend
 
 on:
   push:
-    branches:
-      - develop
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
 
 jobs:
   build:
-    runs-on: self-hosted
+
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Set up Node.js
+    - name: Use Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '20'  # Specify the Node.js version you're using
+        node-version: '18'
 
     - name: Install dependencies
       run: npm install
 
-    - name: Build project
+    - name: Build React app
       run: npm run build
-      
-    # - name: sourcemovement
-    #   run: sudo cp -r /home/administrator/Live-Project/Live_Front/wizinoa/_work/Wizinoa_siteV1/Wizinoa_siteV1/dist/ * /var/www/html/wizinoa
-  
-    # - name: nginxrestart
-    #   run: sudo service nginx restart
